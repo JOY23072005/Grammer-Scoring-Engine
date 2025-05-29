@@ -1,78 +1,70 @@
+# 🎤 Hybrid Grammar Scoring Engine
 
-# 🎙️ Grammar Scoring Engine
-
-An AI-powered web app that scores spoken grammar using both audio and transcribed text. It combines features from speech and text to give a final grammar score via a hybrid deep learning model.
+An AI-powered web app that evaluates spoken grammar using both **audio** and **transcribed text**. It combines speech features and textual grammar analysis to generate a grammar score using a **hybrid deep learning model**.
 
 ---
 
-## ⚠️ Python Version
+## ⚠️ Python Compatibility
 
-**This app is tested and works only on:**
+This app supports:
 
-```
-Python 3.10
-```
-
-Make sure you're using **Python 3.10** before proceeding. Other versions may lead to compatibility issues with packages like `librosa`, `tensorflow`, etc.
+* ✅ Python 3.10
+* ✅ Python 3.11
+* ✅ Python 3.12
+  ❌ Python 3.13 is **not yet supported** due to TensorFlow incompatibility.
 
 ---
 
 ## 📁 Folder Structure
 
 ```
-grammer-scroing-engine/
-│
-├── app/
-│   ├── app.py                  # Streamlit app entry point
-│   ├── temp.py                 # Helper functions
-│   ├── train-model.py          # Training script
-│   │
-│   ├── data/                   # Must contain dataset files
-│   │   ├── audios_train/
-│   │   ├── audios_test/
-│   │   ├── train.csv
-│   │   ├── test.csv
-│   │   └── sample_submission.csv
-│   │
-│   ├── models/                 # Saved models & scalers (auto-created)
-│   │   ├── hybrid_model.h5
-│   │   ├── scaler_audio.pkl
-│   │   └── scaler_text.pkl
-│
-├── tfenv/                      # Virtual environment (excluded from git)
-├── .gitignore
-├── README.md
-└── requirements.txt
+APP/
+├── data/                       # Training/test datasets and audio
+│   ├── audios_train/
+│   ├── audios_test/
+│   ├── train.csv
+│   ├── test.csv
+│   └── sample_submission.csv
+├── models/                     # Saved model & scalers
+│   ├── hybrid_model.keras
+│   ├── scaler_audio.pkl
+│   └── scaler_text.pkl
+├── app.py                      # 🔹 Streamlit app (main entry point)
+├── GPU_Checker.py              # GPU availability check
+├── train-model.py              # Model training script
+├── submission.csv              # Submission format (for competitions)
+└── requirements.txt            # Required Python packages
 ```
+
+(Note: `temp.py` is used for debugging and excluded from documentation.)
 
 ---
 
-## 📂 Required Dataset
+## 🔗 Dataset
 
-The project uses this dataset:  
-🔗 [SHL Dataset – Grammar Error Audio](https://www.kaggle.com/datasets/saurabhkumargupta23/shl-dataset?resource=download)
+This project uses the **SHL Dataset – Grammar Error Audio**.
 
-➡️ **Download and extract it into this path:**
+➞ **Extract into:**
 
 ```
-grammer-scroing-engine/app/data/
+APP/data/
 ```
 
-Place the following:
-- `train.csv`
-- `test.csv`
-- `sample_submission.csv`
-- Folders `audios_train/` and `audios_test/`
+Include:
+
+* `train.csv`, `test.csv`, `sample_submission.csv`
+* Folders: `audios_train/`, `audios_test/`
 
 ---
 
 ## 🚀 Features
 
-- 🧠 Transcription using Whisper model
-- 📖 Grammar checking using LanguageTool
-- 🔊 Audio features (MFCC, Chroma, Zero-crossing rate)
-- 🧮 Scoring via a hybrid neural network
-- 🌐 Web interface using Streamlit
+* 🧠 **Transcription** using OpenAI's Whisper ASR model
+* 📖 **Grammar checking** via LanguageTool API (local Docker or cloud)
+* 🔊 **Audio features**: MFCC, Chroma, ZCR, Spectral Contrast, etc.
+* 🧲 **Hybrid scoring** model using Keras and scikit-learn
+* 🌐 **Web interface** built with Streamlit
+* 🎙️ **Built-in microphone recording** via `st_audiorec`
 
 ---
 
@@ -81,19 +73,21 @@ Place the following:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/grammer-scroing-engine.git
-cd grammer-scroing-engine
+git clone https://github.com/JOY23072005/Grammer-Scoring-Engine.git
+cd hybrid-grammar-engine
 ```
 
-### 2. Set Up Virtual Environment
+### 2. Create and Activate Virtual Environment
 
 ```bash
-python -m venv tfenv
-.	fenv\Scriptsctivate      # On Windows
-# source tfenv/bin/activate  # On macOS/Linux
+python -m venv .venv
+# On Windows:
+.venv\Scripts\activate
+# On macOS/Linux:
+source .venv/bin/activate
 ```
 
-### 3. Install Requirements
+### 3. Install Required Packages
 
 ```bash
 pip install -r requirements.txt
@@ -104,38 +98,50 @@ pip install -r requirements.txt
 ## ▶️ Run the App
 
 ```bash
-streamlit run app/app.py
+streamlit run app.py
 ```
 
 ---
 
 ## 🧠 Train the Model
 
-If you want to retrain the model from scratch:
+To train from scratch or re-train with your data:
 
 ```bash
-python app/train-model.py
+python train-model.py
 ```
 
-This will generate:
-- `models/hybrid_model.h5`
-- `models/scaler_audio.pkl`
-- `models/scaler_text.pkl`
+It will generate:
+
+* `models/hybrid_model.keras`
+* `models/scaler_audio.pkl`
+* `models/scaler_text.pkl`
 
 ---
 
-## 🧾 .gitignore (important)
+## ⚙️ GPU Check (Optional)
 
-```gitignore
-tfenv/
-app/data/
-app/models/
+To check if GPU is detected by TensorFlow:
+
+```bash
+python GPU_Checker.py
 ```
 
-These directories are ignored in version control to avoid uploading large data/models.
+---
+
+## 📜 .gitignore Suggestions
+
+```gitignore
+.venv/
+__pycache__/
+*.pyc
+data/
+models/
+submission.csv
+```
 
 ---
 
 ## 📜 License
 
-MIT License © 2025 [Your Name]
+MIT License © 2025 Joydeep Hans
