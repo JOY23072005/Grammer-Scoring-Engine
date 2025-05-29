@@ -42,7 +42,9 @@ APP/
 
 ## 🔗 Dataset
 
-This project uses the **SHL Dataset – Grammar Error Audio**.
+The project uses this dataset:  
+🔗 [SHL Dataset – Grammar Error Audio](https://www.kaggle.com/datasets/saurabhkumargupta23/shl-dataset?resource=download)
+
 
 ➞ **Extract into:**
 
