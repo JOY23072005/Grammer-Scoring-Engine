@@ -15,6 +15,11 @@ This app supports:
 
 ---
 
+## ⚠️ NOTE! ffmpeg is required -> [Download Link](https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-7.1.1-essentials_build.7z)
+* Extract -> C:/ffmpeg/ffmpeg.exe
+* Set Environment Variable Path -> C://ffmpeg/
+* All set! ffmpeg is ready!
+
 ## 📁 Folder Structure
 
 ```
